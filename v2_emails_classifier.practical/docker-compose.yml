@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  # ─────────────────────────────────────────────
+  # API de prédiction (image de production)
+  # ─────────────────────────────────────────────
+  api:
+    build: .
+    container_name: email_classifier_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro      # modèle entraîné en lecture seule
+    environment:
+      - MODEL_DIR=/app/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ─────────────────────────────────────────────
+  # Entraînement (service one-shot)
+  # Lance : docker compose run --rm trainer
+  # ─────────────────────────────────────────────
+  trainer:
+    build: .
+    container_name: email_classifier_trainer
+    command: python train.py train --csv /app/data/emails.csv --epochs 15
+    volumes:
+      - ./data:/app/data:ro           # CSV en lecture seule
+      - ./models:/app/models          # artefacts en écriture
+    profiles:
+      - training                      # non lancé par défaut avec `docker compose up`
+
+  # ─────────────────────────────────────────────
+  # Extension de catégories (few-shot)
+  # Lance : docker compose run --rm extender
+  # ─────────────────────────────────────────────
+  extender:
+    build: .
+    container_name: email_classifier_extender
+    command: python train.py extend --csv /app/data/new_categories.csv --extra-epochs 5
+    volumes:
+      - ./data:/app/data:ro
+      - ./models:/app/models
+    profiles:
+      - training
