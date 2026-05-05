@@ -1,0 +1,19 @@
+{
+  "categories": [
+    "family",
+    "finance",
+    "games",
+    "human resources",
+    "medical",
+    "pets",
+    "school",
+    "software engineering",
+    "sport",
+    "work/airbus"
+  ],
+  "num_classes": 10,
+  "max_len": 29,
+  "max_features": 3000,
+  "accuracy": 0.8882,
+  "macro_precision": 0.8882
+}
