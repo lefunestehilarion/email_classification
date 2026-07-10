@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "family_not_urgent",
+    "family_urgent",
+    "finance_not_urgent",
+    "finance_urgent",
+    "games_not_urgent",
+    "games_urgent",
+    "human resources_not_urgent",
+    "human resources_urgent",
+    "medical_not_urgent",
+    "medical_urgent",
+    "pets_not_urgent",
+    "pets_urgent",
+    "school_not_urgent",
+    "school_urgent",
+    "software engineering_not_urgent",
+    "software engineering_urgent",
+    "sport_not_urgent",
+    "sport_urgent",
+    "work/airbus_not_urgent",
+    "work/airbus_urgent"
+  ],
+  "num_classes": 20,
+  "max_len": 30,
+  "max_features": 3000,
+  "accuracy": 0.9111,
+  "macro_precision": 0.9129
+}

@@ -1,0 +1,22 @@
+[project]
+name = "v4-classify-csv"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.111.0",
+    "matplotlib==3.9.0",
+    "nltk==3.8.1",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "pydantic==2.7.1",
+    "scikit-learn==1.5.0",
+    "seaborn==0.13.2",
+    "tensorflow-cpu==2.16.1",
+    "torch==2.3.0+cpu",
+    "transformers==4.41.2",
+    "uvicorn[standard]==0.30.1",
+    "wordcloud==1.9.3",
+    "xgboost==2.0.3",
+]
