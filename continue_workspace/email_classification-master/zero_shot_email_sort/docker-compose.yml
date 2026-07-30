@@ -1,0 +1,22 @@
+services:
+  zero-shot:
+    build: .
+    image: zero-shot-email-sort:latest
+    volumes:
+      - ./data:/data           # .eml, mails.csv, feedback.csv en entrée/sortie
+      - ./models:/app/models   # adapters LoRA / fine-tunes sauvegardés
+      - hf-cache:/data/hf-cache
+    # Décommenter pour utiliser le GPU (nvidia-container-toolkit requis sur l'hôte,
+    # et une image de base CUDA — voir le commentaire dans le Dockerfile) :
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    entrypoint: ["python"]
+    command: ["zero_shot_csv.py", "--help"]
+
+volumes:
+  hf-cache:
